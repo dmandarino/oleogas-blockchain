@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Certidão de Nascimento</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  </head>
+  <body style="background-color: #ccc; color: #333;">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="#" onClick="javascript:window.location.reload();">Criar</a>
+        <!-- <a class="navbar-brand" href="list.html">Lista</a> -->
+        </div>
+        <form class="navbar-form navbar-right " onSubmit="App.searchCertificate(); return false;">
+          <div class="form-group">
+            <input type="text" class="form-control" id="searchID" placeholder="Buscar">
+          </div>
+          <button type="submit" class="btn btn-default">Buscar</button>
+        </form>
+      </div>
+    </nav>
+    <div class="container" style="width: 860px; background-color: #d8dcc3;">
+      <div class="row col-lg-12">
+        <h1 class="text-center">Certidão de Nascimento</h1>
+        <p id="certificateCode" style="font-weight: bold; font-size: 16px;" class="text-center"></p>
+        <hr/>
+        <br/>        
+        <form id="#certificateForm" onSubmit="App.createCertificate(); return false;">
+          <div class="form-group row">
+            <label for="name" class="col-md-2 col-form-label">Nome</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="name" placeholder="Nome">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="date" class="col-md-2 col-form-label">Data de Nascimento</label>
+            <div class="col-md-3">
+              <input class="form-control" id="date" name="date" placeholder="DD/MM/AAAA" type="text"/>
+            </div>
+            <label for="date" class="col-md-1 col-form-label">Hora</label>
+            <div class="col-md-3">
+              <input class="form-control" id="hour" name="hour" placeholder="00:00" type="text"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-md-2 col-form-label">Cidade</label>
+            <div class="col-md-7">
+              <input type="text" class="form-control" id="city" placeholder="Cidade">
+            </div>
+            <label for="inputPassword3" class="col-md-1 col-form-label">UF</label>
+            <div class="col-md-2">
+              <input type="text" class="form-control" id="uf" placeholder="UF">
+            </div>
+          </div>
+          <fieldset class="form-group">
+            <div class="row">
+              <legend class="col-form-label col-md-2" style="font-size: 14px; font-weight: bold;">Radios</legend>
+              <div class="col-md-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="gender_M" value="M">
+                  <label class="form-check-label" for="gender_M">
+                    Masculino
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="gender_F" value="F">
+                  <label class="form-check-label" for="gender_F">
+                    Feminino
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <hr/>
+          <h4 class="text-center">Filiação</h4>
+          <br/>
+          <div class="form-group row">
+            <label for="father" class="col-md-2 col-form-label">Pai</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="father" value="Não Informado">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="mother" class="col-md-2 col-form-label">Mãe</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="mother" value="Não Informado">
+            </div>
+          </div>
+          <br/>
+          <div class="form-group row">
+              <label for="paternalGrandfather" class="col-md-1 col-form-label">Avô Paterno</label>
+              <div class="col-md-5">
+                <textarea class="form-control" id="paternalGrandfather" rows="3">Não Informado</textarea>
+              </div>
+              <label for="paternalGrandmother" class="col-md-1 col-form-label">Avó Paterna</label>
+              <div class="col-md-5">
+                <textarea class="form-control" id="paternalGrandmother" rows="3">Não Informado</textarea>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="maternalGrandfather" class="col-md-1 col-form-label">Avô Materno</label>
+              <div class="col-md-5">
+                <textarea class="form-control" id="maternalGrandfather" rows="3">Não Informado</textarea>
+              </div>
+              <label for="maternalGrandmother" class="col-md-1 col-form-label">Avó Materna</label>
+              <div class="col-md-5">
+                <textarea class="form-control" id="maternalGrandmother" rows="3">Não Informado</textarea>
+              </div>
+          </div>
+          <hr/>
+          <h4 class="text-center">Cartório</h4>
+          <br/>
+          <div class="form-group row">
+            <label for="witness" class="col-md-2 col-form-label">Declarante</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="witness" placeholder="Declarante">
+            </div>
+          </div>
+          <p id="accountAddress" class="text-center"></p>
+          <br/>
+          <button class="btn btn-success" type="submit">Criar Certidão</button>
+          <br/><br/>
+        </form>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
