@@ -66,6 +66,16 @@ contract Upstream {
         emit createdEvent(spendCount);
     }
 
+    function spendInProduction ( uint _mobilization,
+                                uint _production,
+                                uint _monitoring) public {
+        spendCount ++;
+        validateSpendInProduction(_mobilization, _production, _monitoring);
+        productions[spendCount] = Production(spendCount, _mobilization, _production, _monitoring);
+        amount.value = amount.value - _mobilization - _production - _monitoring;
+        emit createdEvent(spendCount);
+    }
+
     function validateSpendInExploration(uint _geology, uint _drilling) private {
         require(_geology >= 0 && _drilling >= 0 && _geology + _drilling <= amount.value, 'value grater than amount');
     }
@@ -74,31 +84,8 @@ contract Upstream {
         require(_evaluation >= 0 && _engineering >= 0 && _evaluation + _engineering <= amount.value, 'value grater than amount');
     }
 
-    // function getPersonKey(uint _code) public view returns(uint) {
-    //     uint position = codePosition[_code];
-    //     return position;
-    // }
-
-    // function validatePerson(Person memory person) private {
-    //     require(people[person.code].code == 0, 'code must be unique');
-    //     require(bytes(person.name).length > 0, 'name must not be empty');
-    //     require(bytes(person.city).length > 0, 'city must not be empty');
-    //     require(person.day > 0 && person.day < 31, 'wrong day');
-    //     require(person.month > 0 && person.month < 13, 'wrong month');
-    //     require(person.year > 0, 'year must not be empty');
-    //     bytes memory gender = bytes(person.gender);
-    //     require(keccak256(gender) == keccak256('M') || keccak256(gender) == keccak256('F'), 'gender must not be M or F');
-    //     require(bytes(person.hour).length > 0, 'hour must not be empty');
-    // }
-
-    // function validateRelatives(Relatives memory relative) private {
-    //     require(relativeList[relative.code].code == 0, 'code must be unique');
-    //     require(bytes(relative.father).length > 0, 'father must not be empty');
-    //     require(bytes(relative.mother).length > 0, 'mother must not be empty');
-    //     require(bytes(relative.paternalGrandfather).length > 0, 'paternalGrandfather must not be empty');
-    //     require(bytes(relative.paternalGrandmother).length > 0, 'paternalGrandmother must not be empty');
-    //     require(bytes(relative.maternalGrandfather).length > 0, 'maternalGrandfather must not be empty');
-    //     require(bytes(relative.maternalGrandmother).length > 0, 'maternalGrandmother must not be empty');
-    //     // require(bytes(person.witness).length > 0, 'witness must not be empty');
-    // }
+    function validateSpendInProduction(uint _mobilization, uint _production, uint _monitoring) private {
+        require(_mobilization >= 0 && _production >= 0 && _monitoring >= 0, 'negative values');
+        require(_mobilization + _production + _monitoring <= amount.value, 'value grater than amount');
+    }
 }

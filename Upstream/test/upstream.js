@@ -88,4 +88,23 @@ contract("Upstream", function(accounts) {
         assert(error.message.indexOf('value grater than amount') >= 0, 'value grater than amount');
       });
     });
+
+    it("Spend in Production", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        instance.spendInProduction(100000000, 50000000, 50000000);
+        return instance.amount();
+      }).then(function (amount) {
+        assert.equal(amount.value, 600000000);
+      });
+    });
+
+    it("Spend more then Amount in Production", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        instance.spendInProduction(1000000000000, 0, 0);
+      }).then(assert.fail).catch(function(error) {
+        assert(error.message.indexOf('value grater than amount') >= 0, 'value grater than amount');
+      });
+    });
 });
