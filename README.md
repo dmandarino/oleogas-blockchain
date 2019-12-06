@@ -31,16 +31,22 @@
 - **[MetaMask](https://metamask.io/)**
 - **[Sublime Text](https://www.sublimetext.com/)**
 
-## Executar Truffle
+##Instalação de dependências
+> npm install
 
-truffle migrate --reset
+##Rebuild do Contrato e Testes
+> truffle migrate --reset
 
-## Executar testes no Truffle
+> truffle test
 
-truffle test
+##Execução das páginas
+> npm run dev
 
-## Instalar Lite Server
-npm install lite-server -g
+##Console truffle e funções convenientes
+> truffle console
 
-## Executar Lite Server
-nom run dev
+> Upstream.deployed().then(function (instance) { app = instance })
+
+> web3.eth.getAccounts().then(function (account) { acc = account[0] })
+
+> app.function(parameters, { from: acc })
