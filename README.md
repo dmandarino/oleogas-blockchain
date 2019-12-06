@@ -31,18 +31,18 @@
 - **[MetaMask](https://metamask.io/)**
 - **[Sublime Text](https://www.sublimetext.com/)**
 
-##Instalação de dependências
+## Instalação de dependências
 > npm install
 
-##Rebuild do Contrato e Testes
+## Rebuild do Contrato e Testes
 > truffle migrate --reset
 
 > truffle test
 
-##Execução das páginas
+## Execução das páginas
 > npm run dev
 
-##Console truffle e funções convenientes
+## Console truffle e funções convenientes
 > truffle console
 
 > Upstream.deployed().then(function (instance) { app = instance })
