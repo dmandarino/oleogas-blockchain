@@ -38,7 +38,7 @@ contract Upstream {
     uint public productionsCount;
 
     constructor () public {
-        addAmount(20000000000);
+        addAmount(0);
     }
 
 	function addAmount (uint _amount) public {
