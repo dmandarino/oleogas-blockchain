@@ -16,6 +16,9 @@
     "lite-server": "^2.3.0"
   },
   "dependencies": {
+    "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
+    "jquery": "^3.4.1",
     "solc": "^0.5.0"
   }
 }
