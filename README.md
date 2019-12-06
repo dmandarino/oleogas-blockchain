@@ -35,6 +35,10 @@
 
 truffle migrate --reset
 
+## Executar testes no Truffle
+
+truffle test
+
 ## Instalar Lite Server
 npm install lite-server -g
 
