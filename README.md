@@ -4,7 +4,7 @@
 
 - Barbara Herrera **[@barbara-herrera](https://github.com/barbara-herrera)**
 - Daniela Brazão Maksoud **[@danielamaksoud](https://github.com/danielamaksoud)**
-- Douglas Mandarino **[@barbara-herrera](https://github.com/dmandarino)**
+- Douglas Mandarino **[@dmandarino](https://github.com/dmandarino)**
 - Stephanie Fay **[@stephaniefay](https://github.com/stephaniefay)**
 
 ## Professores
