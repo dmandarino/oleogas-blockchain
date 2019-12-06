@@ -29,6 +29,7 @@ contract Upstream {
     }
     // Read/write Upstream
     uint public amount;
+    uint public totalAmount;
     mapping(uint => Exploration) public explorations;
     mapping(uint => Development) public developments;
     mapping(uint => Production) public productions;
@@ -42,6 +43,7 @@ contract Upstream {
 
 	function addAmount (uint _amount) public {
         amount += _amount;
+        totalAmount += _amount;
 	}
 
     function spendInExploration ( uint _geology,

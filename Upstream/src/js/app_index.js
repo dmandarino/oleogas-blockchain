@@ -43,35 +43,17 @@ App = {
 
   showAmount: function() {
    console.log("opa");
-    App.contract.Upstream.deployed().then(function (instance) {
+    App.contracts.Upstream.deployed().then(function (instance) {
       return instance.totalAmount();
     }).then(function (total) {
       console.log(total);
-      $("#totalInvestment").html(total);
+      $("#totalInvestment").html("aaaa" + total[0]);
     });
-  },
-
-  addAmount: function() {
-    const investment = $('#investment').val();
-
-    var upstreamInstance;
-
-    App.contracts.Upstream.deployed().then(function(instance) {
-      upstreamInstance = instance;
-      const investmentInt = parseInt(investment);
-      return upstreamInstance.addAmount(investmentInt, { from: App.account });
-    }).then(function () {
-      console.log('saved');
-      window.location.reload();
-    }).catch(function(err) {
-      console.error(err);
-    });
-  },
+  }
 };
 
 $(function() {
   $(window).load(function() {
-    console.log("oaoaoa");
     App.init();
   });
 });
