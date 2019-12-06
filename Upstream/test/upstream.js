@@ -50,6 +50,16 @@ contract("Upstream", function(accounts) {
       });
     });
 
+    it("Check Exploration values", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        return instance.getExplorationSpent();
+      }).then(function (exploration) {
+        assert.equal(exploration[0], 11000000000);
+        assert.equal(exploration[1], 6000000000);
+      });
+    });
+
     it("Spend in Development Evaluation", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
@@ -89,6 +99,16 @@ contract("Upstream", function(accounts) {
       });
     });
 
+    it("Check Development values", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        return instance.getDevelopmentSpent();
+      }).then(function (development) {
+        assert.equal(development[0], 1100000000);
+        assert.equal(development[1], 600000000);
+      });
+    });
+
     it("Spend in Production", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
@@ -96,6 +116,17 @@ contract("Upstream", function(accounts) {
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 600000000);
+      });
+    });
+
+    it("Check Production values", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        return instance.getProductionSpent();
+      }).then(function (production) {
+        assert.equal(production[0], 100000000);
+        assert.equal(production[1], 50000000);
+        assert.equal(production[2], 50000000);
       });
     });
 

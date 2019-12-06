@@ -1,16 +1,10 @@
 pragma solidity ^0.5.0;
-pragma experimental ABIEncoderV2;
 
 contract Upstream {
 
     event createdEvent (
         uint indexed _code
     );
-
-    struct Amount {
-        uint value;
-        address last_investment_owner;
-    }
 
     struct Exploration {
         uint code;
@@ -38,45 +32,76 @@ contract Upstream {
     mapping(uint => Exploration) public explorations;
     mapping(uint => Development) public developments;
     mapping(uint => Production) public productions;
-    mapping(uint => uint) public codePosition;
-    uint public spendCount;
-    uint public investmentCount;
+    uint public explorationsCount;
+    uint public developmentsCount;
+    uint public productionsCount;
 
     constructor () public {
         addAmount(0);
     }
 
 	function addAmount (uint _amount) public {
-		investmentCount ++;
 		amount = amount + _amount;
 	}
 
     function spendInExploration ( uint _geology,
                                 uint _drilling) public {
-        spendCount ++;
+        explorationsCount ++;
         validateSpendInExploration(_geology, _drilling);
-        explorations[spendCount] = Exploration(spendCount, _geology, _drilling, address(0));
+        explorations[explorationsCount] = Exploration(explorationsCount, _geology, _drilling, address(0));
         amount = amount - _geology - _drilling;
-        emit createdEvent(spendCount);
+        emit createdEvent(explorationsCount);
     }
 
     function spendInDevelopment ( uint _evaluation,
                                 uint _engineering) public {
-        spendCount ++;
+        developmentsCount ++;
         validateSpendInDevelopment(_evaluation, _engineering);
-        developments[spendCount] = Development(spendCount, _evaluation, _engineering, address(0));
+        developments[developmentsCount] = Development(developmentsCount, _evaluation, _engineering, address(0));
         amount = amount - _evaluation - _engineering;
-        emit createdEvent(spendCount);
+        emit createdEvent(developmentsCount);
     }
 
     function spendInProduction ( uint _mobilization,
                                 uint _production,
                                 uint _monitoring) public {
-        spendCount ++;
+        productionsCount ++;
         validateSpendInProduction(_mobilization, _production, _monitoring);
-        productions[spendCount] = Production(spendCount, _mobilization, _production, _monitoring, address(0));
+        productions[productionsCount] = Production(productionsCount, _mobilization, _production, _monitoring, address(0));
         amount = amount - _mobilization - _production - _monitoring;
-        emit createdEvent(spendCount);
+        emit createdEvent(productionsCount);
+    }
+
+    function getDevelopmentSpent() public view returns(uint, uint) {
+        uint evaluation = 0;
+        uint engineering = 0;
+        for (uint i = 1; i <= developmentsCount; i++) {
+            evaluation = evaluation + developments[i].evaluation;
+            engineering = engineering + developments[i].engineering;
+        }
+        return (evaluation, engineering);
+    }
+
+    function getProductionSpent() public view returns(uint, uint, uint) {
+        uint mobilization = 0;
+        uint production = 0;
+        uint monitoring = 0;
+        for (uint i = 1; i <= productionsCount; i++) {
+            mobilization = mobilization + productions[i].mobilization;
+            production = production + productions[i].production;
+            monitoring = monitoring + productions[i].monitoring;
+        }
+        return (mobilization, production, monitoring);
+    }
+
+    function getExplorationSpent() public view returns(uint, uint) {
+        uint geology = 0;
+        uint drilling = 0;
+        for (uint i = 1; i <= explorationsCount; i++) {
+            geology = geology + explorations[i].geology;
+            drilling = drilling + explorations[i].drilling;
+        }
+        return (geology, drilling);
     }
 
     function validateSpendInExploration(uint _geology, uint _drilling) private {
