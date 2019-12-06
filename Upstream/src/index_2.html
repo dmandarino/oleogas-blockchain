@@ -8,6 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
   </head>
   <body style="background-color: #ccc; color: #333;">
     <nav class="navbar navbar-default">
@@ -26,85 +27,16 @@
     </nav>
     <div class="container" style="width: 860px; background-color: #d8dcc3;">
       <div class="row col-lg-12">
-        <h1 class="text-center">Certidão de Nascimento</h1>
+        <h1 class="text-center">Óleao e Gás - UPSTREAM</h1>
         <p id="certificateCode" style="font-weight: bold; font-size: 16px;" class="text-center"></p>
         <hr/>
-        <br/>        
-        <form id="#certificateForm" onSubmit="App.createCertificate2(); return false;">
+        <br/>      
+        <p id="amountValue" class="text-center"></p>
+        <form id="#certificateForm" onSubmit="App.createCertificate(); return false;">
           <div class="form-group row">
-            <label for="inputEmail3" class="col-md-2 col-form-label">Nome</label>
+            <label for="name" class="col-md-2 col-form-label">Investir</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="name" placeholder="Nome">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="inputPassword3" class="col-md-2 col-form-label">Cidade e UF</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="city" placeholder="Cidade">
-            </div>
-          </div>
-          <fieldset class="form-group">
-            <div class="row">
-              <legend class="col-form-label col-md-2" style="font-size: 14px; font-weight: bold;">Radios</legend>
-              <div class="col-md-10">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gender" id="gender_M" value="M">
-                  <label class="form-check-label" for="gender_M">
-                    Masculino
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gender" id="gender_F" value="F">
-                  <label class="form-check-label" for="gender_F">
-                    Feminino
-                  </label>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-          <hr/>
-          <h4 class="text-center">Filiação</h4>
-          <br/>
-          <div class="form-group row">
-            <label for="father" class="col-md-2 col-form-label">Pai</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="father" value="Não Informado">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="mother" class="col-md-2 col-form-label">Mãe</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="mother" value="Não Informado">
-            </div>
-          </div>
-          <br/>
-          <div class="form-group row">
-              <label for="paternalGrandfather" class="col-md-1 col-form-label">Avô Paterno</label>
-              <div class="col-md-5">
-                <textarea class="form-control" id="paternalGrandfather" rows="3">Não Informado</textarea>
-              </div>
-              <label for="paternalGrandmother" class="col-md-1 col-form-label">Avó Paterna</label>
-              <div class="col-md-5">
-                <textarea class="form-control" id="paternalGrandmother" rows="3">Não Informado</textarea>
-              </div>
-          </div>
-          <div class="form-group row">
-              <label for="maternalGrandfather" class="col-md-1 col-form-label">Avô Materno</label>
-              <div class="col-md-5">
-                <textarea class="form-control" id="maternalGrandfather" rows="3">Não Informado</textarea>
-              </div>
-              <label for="maternalGrandmother" class="col-md-1 col-form-label">Avó Materna</label>
-              <div class="col-md-5">
-                <textarea class="form-control" id="maternalGrandmother" rows="3">Não Informado</textarea>
-              </div>
-          </div>
-          <hr/>
-          <h4 class="text-center">Cartório</h4>
-          <br/>
-          <div class="form-group row">
-            <label for="witness" class="col-md-2 col-form-label">Declarante</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="witness" placeholder="Declarante">
             </div>
           </div>
           <p id="accountAddress" class="text-center"></p>

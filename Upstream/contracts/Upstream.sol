@@ -16,12 +16,14 @@ contract Upstream {
         uint code;
         uint geology;
         uint drilling;
+        address last_investment_owner;
     }
 
     struct Development {
         uint code;
         uint evaluation;
         uint engineering;
+        address last_investment_owner;
     }
 
     struct Production {
@@ -29,6 +31,7 @@ contract Upstream {
         uint mobilization;
         uint production;
         uint monitoring;
+        address last_investment_owner;
     }
     // Read/write Upstream
     Amount public amount;
@@ -52,7 +55,7 @@ contract Upstream {
                                 uint _drilling) public {
         spendCount ++;
         validateSpendInExploration(_geology, _drilling);
-        explorations[spendCount] = Exploration(spendCount, _geology, _drilling);
+        explorations[spendCount] = Exploration(spendCount, _geology, _drilling, address(0));
         amount.value = amount.value - _geology - _drilling;
         emit createdEvent(spendCount);
     }
@@ -61,7 +64,7 @@ contract Upstream {
                                 uint _engineering) public {
         spendCount ++;
         validateSpendInDevelopment(_evaluation, _engineering);
-        developments[spendCount] = Development(spendCount, _evaluation, _engineering);
+        developments[spendCount] = Development(spendCount, _evaluation, _engineering, address(0));
         amount.value = amount.value - _evaluation - _engineering;
         emit createdEvent(spendCount);
     }
@@ -71,7 +74,7 @@ contract Upstream {
                                 uint _monitoring) public {
         spendCount ++;
         validateSpendInProduction(_mobilization, _production, _monitoring);
-        productions[spendCount] = Production(spendCount, _mobilization, _production, _monitoring);
+        productions[spendCount] = Production(spendCount, _mobilization, _production, _monitoring, address(0));
         amount.value = amount.value - _mobilization - _production - _monitoring;
         emit createdEvent(spendCount);
     }
