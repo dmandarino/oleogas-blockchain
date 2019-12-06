@@ -7,7 +7,7 @@ contract("Upstream", function(accounts) {
         instance.addAmount(20000000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 20000000000);
+        assert.equal(amount, 20000000000);
       });
     });
 
@@ -17,7 +17,7 @@ contract("Upstream", function(accounts) {
         instance.spendInExploration(10000000000, 0);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 10000000000);
+        assert.equal(amount, 10000000000);
       });
     });
 
@@ -27,7 +27,7 @@ contract("Upstream", function(accounts) {
         instance.spendInExploration(0, 5000000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 5000000000);
+        assert.equal(amount, 5000000000);
       });
     });
 
@@ -37,7 +37,7 @@ contract("Upstream", function(accounts) {
         instance.spendInExploration(1000000000, 1000000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 3000000000);
+        assert.equal(amount, 3000000000);
       });
     });
 
@@ -56,7 +56,7 @@ contract("Upstream", function(accounts) {
         instance.spendInDevelopment(1000000000, 0);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 2000000000);
+        assert.equal(amount, 2000000000);
       });
     });
 
@@ -66,7 +66,7 @@ contract("Upstream", function(accounts) {
         instance.spendInDevelopment(0, 1000000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 1000000000);
+        assert.equal(amount, 1000000000);
       });
     });
 
@@ -76,7 +76,7 @@ contract("Upstream", function(accounts) {
         instance.spendInDevelopment(100000000, 100000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 800000000);
+        assert.equal(amount, 800000000);
       });
     });
 
@@ -95,7 +95,7 @@ contract("Upstream", function(accounts) {
         instance.spendInProduction(100000000, 50000000, 50000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 600000000);
+        assert.equal(amount, 600000000);
       });
     });
 
