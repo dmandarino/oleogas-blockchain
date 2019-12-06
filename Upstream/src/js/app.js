@@ -53,7 +53,7 @@ App = {
     App.contracts.Upstream.deployed().then(function(instance) {
       return instance.amount();
     }).then(function (amount) {
-      $("#amountValue").html("Montante dispoível: " + amount);
+      $("#amountValue").html("Montante disponível : R$ " + parseFloat(amount[0]).toLocaleString('pt-BR'));
     });
   },
 
