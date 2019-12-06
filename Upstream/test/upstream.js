@@ -2,14 +2,6 @@ var Upstream = artifacts.require("./Upstream.sol");
 
 contract("Upstream", function(accounts) {
     // var UpstreamInstance;
-    it("initializes with Investment", function () {
-      return Upstream.deployed().then(function (instance) {
-        instance.addAmount(20000000000);
-        return instance.amount();
-      }).then(function (amount) {
-        assert.equal(amount, 20000000000);
-      });
-    });
 
     it("Spend in Exploration Geology", function () {
       return Upstream.deployed().then(function (instance) {

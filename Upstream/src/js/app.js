@@ -57,6 +57,62 @@ App = {
     });
   },
 
+  spendInExploration: function() {
+    const value = $('#exploration').val();
+    const selected = $('input[name="exploration"]:checked').val();
+
+    App.contracts.Upstream.deployed().then(function(instance) {
+      const investmentInt = parseInt(value);
+      if (selected == 'geology') {
+        return instance.spendInExploration(investmentInt, 0, { from: App.account, gas:3000000 });
+      } 
+      return instance.spendInExploration(0, investmentInt, { from: App.account, gas:3000000 });
+    }).then(function () {
+      console.log('saved');
+      window.location.reload();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
+  spendInDevelopment: function() {
+    const value = $('#development').val();
+    const selected = $('input[name="development"]:checked').val();
+
+    App.contracts.Upstream.deployed().then(function(instance) {
+      const investmentInt = parseInt(value);
+      if (selected == 'evaluation') {
+        return instance.spendInDevelopment(investmentInt, 0, { from: App.account, gas:3000000 });
+      } 
+      return instance.spendInDevelopment(0, investmentInt, { from: App.account, gas:3000000 });
+    }).then(function () {
+      console.log('saved');
+      window.location.reload();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
+  spendInProduction: function() {
+    const value = $('#production').val();
+    const selected = $('input[name="production"]:checked').val();
+
+    App.contracts.Upstream.deployed().then(function(instance) {
+      const investmentInt = parseInt(value);
+      if (selected == 'mobilization') {
+        return instance.spendInProduction(investmentInt, 0, 0, { from: App.account, gas:3000000 });
+      } else if (selected == 'monitoring') {
+        return instance.spendInProduction(0, 0, investmentInt, { from: App.account, gas:3000000 });
+      } 
+      return instance.spendInProduction(0, investmentInt, 0, { from: App.account, gas:3000000 });
+    }).then(function () {
+      console.log('saved');
+      window.location.reload();
+    }).catch(function(err) {
+      console.error(err);
+    });
+  },
+
   addAmount: function() {
     const investment = $('#investment').val();
 
