@@ -2,14 +2,6 @@ var Upstream = artifacts.require("./Upstream.sol");
 
 contract("Upstream", function(accounts) {
     // var UpstreamInstance;
-    it("initializes with Investment", function () {
-      return Upstream.deployed().then(function (instance) {
-        // UpstreamInstance = instance;
-        return instance.amount();
-      }).then(function (amount) {
-        assert.equal(amount.value, 20000000000);
-      });
-    });
 
     it("Spend in Exploration Geology", function () {
       return Upstream.deployed().then(function (instance) {
@@ -17,7 +9,7 @@ contract("Upstream", function(accounts) {
         instance.spendInExploration(10000000000, 0);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 10000000000);
+        assert.equal(amount, 10000000000);
       });
     });
 
@@ -27,7 +19,7 @@ contract("Upstream", function(accounts) {
         instance.spendInExploration(0, 5000000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 5000000000);
+        assert.equal(amount, 5000000000);
       });
     });
 
@@ -37,7 +29,7 @@ contract("Upstream", function(accounts) {
         instance.spendInExploration(1000000000, 1000000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 3000000000);
+        assert.equal(amount, 3000000000);
       });
     });
 
@@ -50,13 +42,23 @@ contract("Upstream", function(accounts) {
       });
     });
 
+    it("Check Exploration values", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        return instance.getExplorationSpent();
+      }).then(function (exploration) {
+        assert.equal(exploration[0], 11000000000);
+        assert.equal(exploration[1], 6000000000);
+      });
+    });
+
     it("Spend in Development Evaluation", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
         instance.spendInDevelopment(1000000000, 0);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 2000000000);
+        assert.equal(amount, 2000000000);
       });
     });
 
@@ -66,7 +68,7 @@ contract("Upstream", function(accounts) {
         instance.spendInDevelopment(0, 1000000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 1000000000);
+        assert.equal(amount, 1000000000);
       });
     });
 
@@ -76,7 +78,7 @@ contract("Upstream", function(accounts) {
         instance.spendInDevelopment(100000000, 100000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 800000000);
+        assert.equal(amount, 800000000);
       });
     });
 
@@ -89,13 +91,34 @@ contract("Upstream", function(accounts) {
       });
     });
 
+    it("Check Development values", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        return instance.getDevelopmentSpent();
+      }).then(function (development) {
+        assert.equal(development[0], 1100000000);
+        assert.equal(development[1], 600000000);
+      });
+    });
+
     it("Spend in Production", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
         instance.spendInProduction(100000000, 50000000, 50000000);
         return instance.amount();
       }).then(function (amount) {
-        assert.equal(amount.value, 600000000);
+        assert.equal(amount, 600000000);
+      });
+    });
+
+    it("Check Production values", function () {
+      return Upstream.deployed().then(function (instance) {
+        // UpstreamInstance = instance;
+        return instance.getProductionSpent();
+      }).then(function (production) {
+        assert.equal(production[0], 100000000);
+        assert.equal(production[1], 50000000);
+        assert.equal(production[2], 50000000);
       });
     });
 

@@ -1,0 +1,19 @@
+body {
+  background-color: #ccc;
+  color: #333;
+}
+
+.container {
+	width: 80%;
+	max-width: 1000px;
+}
+
+.verde {
+	background-color: #d8dcc3;
+}
+
+@media (max-width: 600px) {
+	.container {
+		width: 100%;
+	}
+}
