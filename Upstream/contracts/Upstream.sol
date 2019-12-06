@@ -71,6 +71,7 @@ contract Upstream {
         validateSpendInProduction(_mobilization, _production, _monitoring);
         productions[productionsCount] = Production(productionsCount, _mobilization, _production, _monitoring, address(0));
         amount -= (_mobilization + _production + _monitoring);
+        amount += (_mobilization + _production + _monitoring);
         emit createdEvent(productionsCount);
     }
 
