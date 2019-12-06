@@ -35,14 +35,11 @@ App = {
     var loader = $("#loader");
     var content = $("#content");
   
-    loader.show();
-    content.hide();
-  
     // Load account data
     web3.eth.getCoinbase(function(err, account) {
       if (err === null) {
         App.account = account;
-        $("#accountAddress").html("Endereço: " + account);
+        $("#accountAddress").html("Account Address: " + account);
         App.showAmount();
       }
     });
@@ -53,7 +50,7 @@ App = {
       return instance.amount();
     }).then(function (amount) {
       console.log(amount);
-      $("#amountValue").html("Montante disponível : R$ " + amount.toString());
+      $("#investedMoney").html("R$ " + amount.toString() + ",00");
     });
   },
 
