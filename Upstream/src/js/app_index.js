@@ -98,12 +98,12 @@ App = {
   },
 
   getEarnings: function() {
-  /*  App.contracts.Upstream.deployed().then(function (instance) {
-      return instance.totalAmount();
+    App.contracts.Upstream.deployed().then(function (instance) {
+      return instance.amount();
     }).then(function (total) {
       console.log(total);
-      $("#totalInvestment").html(total + " ");
-    }); */
+      $("#totalEarning").html("R$ " + total + ",00");
+    }); 
   }
 };
 
