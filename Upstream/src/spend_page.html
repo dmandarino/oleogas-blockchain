@@ -35,50 +35,55 @@
         <hr/>
         <br/>      
         <p id="amountValue" class="text-center"></p>
+      </div>
+      <div class="row col-lg-12">
         <form id="#spendInExploration" onSubmit="App.spendInExploration(); return false;">
           <div class="form-group row">
-            <select id="#explorationSelect" name="exploration" class="col-md-2 form-control">
+            <select id="#explorationSelect" name="exploration" class="col-md-4 form-control">
               <option value="geology">Geologia</option>
               <option value="drilling">Perfuração</option>
             </select>
-            <div class="col-md-10">
+            <div class="col-md-6">
               <input type="text" class="form-control" id="exploration" placeholder="1000">
             </div>
           </div>
           <button class="btn btn-success" type="submit">Alocar Investimento</button>
           <br/><br/>
-        </form>        
-        <br/><br/>
+        </form> 
+      </div>   
+      <div class="row col-lg-12">
         <form id="#spendInDevelopment" onSubmit="App.spendInDevelopment(); return false;">
           <div class="form-group row">
-            <select id="#developmentSelect" name="development" class="col-md-2 form-control">
+            <select id="#developmentSelect" name="development" class="col-md-4 form-control">
               <option value="evaluation">Avaliação</option>
               <option value="engineering">Engenharia</option>
             </select>
-            <div class="col-md-10">
+            <div class="col-md-6">
               <input type="text" class="form-control" id="development" placeholder="1000">
             </div>
           </div>
           <button class="btn btn-success" type="submit">Alocar Investimento</button>
           <br/><br/>
         </form> 
-        <br/><br/>
+      </div>
+      <div class="row col-lg-12">
         <form id="#spendInProduction" onSubmit="App.spendInProduction(); return false;">
           <div class="form-group row">
-            <select id="#productionSelect" name="production" class="col-md-2 form-control">
+            <select id="#productionSelect" name="production" class="col-md-4 form-control">
               <option value="mobilization">Mobilização</option>
               <option value="prod">Produção</option>
               <option value="monitoring">Monitoramento</option>
             </select>
-            <div class="col-md-10">
+            <div class="col-md-6">
               <input type="text" class="form-control" id="production" placeholder="1000">
             </div>
           </div>
           <button class="btn btn-success" type="submit">Alocar Investimento</button>
           <br/><br/>
         </form> 
-        <br/>
-        <p id="accountAddress" class="text-center"></p>       
+      </div>
+      <br/>
+      <p id="accountAddress" class="text-center"></p>       
       </div>
     </div>
 
