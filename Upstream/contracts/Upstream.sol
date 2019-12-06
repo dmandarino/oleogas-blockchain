@@ -41,7 +41,7 @@ contract Upstream {
     }
 
 	function addAmount (uint _amount) public {
-		amount = amount + _amount;
+        amount += _amount;
 	}
 
     function spendInExploration ( uint _geology,
@@ -49,7 +49,7 @@ contract Upstream {
         explorationsCount ++;
         validateSpendInExploration(_geology, _drilling);
         explorations[explorationsCount] = Exploration(explorationsCount, _geology, _drilling, address(0));
-        amount = amount - _geology - _drilling;
+        amount -= (_geology + _drilling);
         emit createdEvent(explorationsCount);
     }
 
@@ -58,7 +58,7 @@ contract Upstream {
         developmentsCount ++;
         validateSpendInDevelopment(_evaluation, _engineering);
         developments[developmentsCount] = Development(developmentsCount, _evaluation, _engineering, address(0));
-        amount = amount - _evaluation - _engineering;
+        amount -= (_evaluation + _engineering);
         emit createdEvent(developmentsCount);
     }
 
@@ -68,7 +68,7 @@ contract Upstream {
         productionsCount ++;
         validateSpendInProduction(_mobilization, _production, _monitoring);
         productions[productionsCount] = Production(productionsCount, _mobilization, _production, _monitoring, address(0));
-        amount = amount - _mobilization - _production - _monitoring;
+        amount -= (_mobilization + _production + _monitoring);
         emit createdEvent(productionsCount);
     }
 
