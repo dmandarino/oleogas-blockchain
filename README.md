@@ -16,8 +16,13 @@
 
 | Nome do Arquivo | Descrição |
 | ------------- | ------------- |
-| Upstream.sol  | Contrato inteligente. |
-| index.html | Página principal.  |
+| Upstream.sol  | Smart contract. |
+| index.html | Dashboard.  |
+| investments.html | Investments page.  |
+| spendings.html | Investment allocation page.  |
+| app_index.js | Dashboard JS.  |
+| app_investments.js | Investments JS.  |
+| app_spendings.js | Allocations JS.  |
 
 ## Recursos Utilizados
 
