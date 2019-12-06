@@ -65,10 +65,12 @@ App = {
     App.contracts.Upstream.deployed().then(function(instance) {
       upstreamInstance = instance;
       const investmentInt = parseInt(investment);
-      return instance.addAmount(investmentInt);
+      return upstreamInstance.addAmount(investmentInt, { from: App.account, gas:20000000 });
     }).then(function () {
       console.log('saved');
-      alert('Sucesso'+ newCertificateCode);
+      return upstreamInstance.addAmount();
+    }).then(function (amount) {
+      alert('Sucesso'+ amount);
       window.location.reload();
     }).catch(function(err) {
       console.error(err);
