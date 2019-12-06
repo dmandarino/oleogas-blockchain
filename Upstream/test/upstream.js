@@ -4,7 +4,7 @@ contract("Upstream", function(accounts) {
     // var UpstreamInstance;
     it("initializes with Investment", function () {
       return Upstream.deployed().then(function (instance) {
-        // UpstreamInstance = instance;
+        instance.addAmount(20000000000);
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount.value, 20000000000);

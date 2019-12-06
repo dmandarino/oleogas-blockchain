@@ -32,16 +32,16 @@
         <hr/>
         <br/>      
         <p id="amountValue" class="text-center"></p>
-        <form id="#certificateForm" onSubmit="App.createCertificate(); return false;">
+        <form id="#addAmountForm" onSubmit="App.addAmount(); return false;">
           <div class="form-group row">
-            <label for="name" class="col-md-2 col-form-label">Investir</label>
+            <label for="investment" class="col-md-2 col-form-label">Investir</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="name" placeholder="Nome">
+              <input type="text" class="form-control" id="name" placeholder="valor">
             </div>
           </div>
           <p id="accountAddress" class="text-center"></p>
           <br/>
-          <button class="btn btn-success" type="submit">Criar Certidão</button>
+          <button class="btn btn-success" type="submit">Enviar Investimento</button>
           <br/><br/>
         </form>
       </div>

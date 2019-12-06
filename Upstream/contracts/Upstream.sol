@@ -42,11 +42,9 @@ contract Upstream {
     uint public spendCount;
     uint public investmentCount;
 
-    constructor () public {
-		addAmount(20000000000);
-	}
+    constructor () public {}
 
-	function addAmount (uint _amount) private {
+	function addAmount (uint _amount) public {
 		investmentCount ++;
 		amount = Amount(_amount, address(0));
 	}

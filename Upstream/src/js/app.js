@@ -50,13 +50,28 @@ App = {
   },
 
   showAmount: function() {
-    console.log('AQUIIIIIIIIIIIII')
     App.contracts.Upstream.deployed().then(function(instance) {
-      console.log('DENTRO')
       return instance.amount();
     }).then(function (amount) {
-      console.log('CERTIFICADO')
       $("#amountValue").html("Montante dispoível: " + amount);
+    });
+  },
+
+  addAmount: function() {
+    const investment = $('#investment').val();
+
+    var upstreamInstance;
+
+    App.contracts.Upstream.deployed().then(function(instance) {
+      upstreamInstance = instance;
+      const investmentInt = parseInt(investment);
+      return instance.addAmount(investmentInt);
+    }).then(function () {
+      console.log('saved');
+      alert('Sucesso'+ newCertificateCode);
+      window.location.reload();
+    }).catch(function(err) {
+      console.error(err);
     });
   },
 };
