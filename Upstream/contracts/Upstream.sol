@@ -34,7 +34,7 @@ contract Upstream {
         address last_investment_owner;
     }
     // Read/write Upstream
-    Amount public amount;
+    uint public amount;
     mapping(uint => Exploration) public explorations;
     mapping(uint => Development) public developments;
     mapping(uint => Production) public productions;
@@ -42,11 +42,13 @@ contract Upstream {
     uint public spendCount;
     uint public investmentCount;
 
-    constructor () public {}
+    constructor () public {
+        addAmount(0);
+    }
 
 	function addAmount (uint _amount) public {
 		investmentCount ++;
-		amount = Amount(_amount, address(0));
+		amount = amount + _amount;
 	}
 
     function spendInExploration ( uint _geology,
@@ -54,7 +56,7 @@ contract Upstream {
         spendCount ++;
         validateSpendInExploration(_geology, _drilling);
         explorations[spendCount] = Exploration(spendCount, _geology, _drilling, address(0));
-        amount.value = amount.value - _geology - _drilling;
+        amount = amount - _geology - _drilling;
         emit createdEvent(spendCount);
     }
 
@@ -63,7 +65,7 @@ contract Upstream {
         spendCount ++;
         validateSpendInDevelopment(_evaluation, _engineering);
         developments[spendCount] = Development(spendCount, _evaluation, _engineering, address(0));
-        amount.value = amount.value - _evaluation - _engineering;
+        amount = amount - _evaluation - _engineering;
         emit createdEvent(spendCount);
     }
 
@@ -73,20 +75,20 @@ contract Upstream {
         spendCount ++;
         validateSpendInProduction(_mobilization, _production, _monitoring);
         productions[spendCount] = Production(spendCount, _mobilization, _production, _monitoring, address(0));
-        amount.value = amount.value - _mobilization - _production - _monitoring;
+        amount = amount - _mobilization - _production - _monitoring;
         emit createdEvent(spendCount);
     }
 
     function validateSpendInExploration(uint _geology, uint _drilling) private {
-        require(_geology >= 0 && _drilling >= 0 && _geology + _drilling <= amount.value, 'value grater than amount');
+        require(_geology >= 0 && _drilling >= 0 && _geology + _drilling <= amount, 'value grater than amount');
     }
 
     function validateSpendInDevelopment(uint _evaluation, uint _engineering) private {
-        require(_evaluation >= 0 && _engineering >= 0 && _evaluation + _engineering <= amount.value, 'value grater than amount');
+        require(_evaluation >= 0 && _engineering >= 0 && _evaluation + _engineering <= amount, 'value grater than amount');
     }
 
     function validateSpendInProduction(uint _mobilization, uint _production, uint _monitoring) private {
         require(_mobilization >= 0 && _production >= 0 && _monitoring >= 0, 'negative values');
-        require(_mobilization + _production + _monitoring <= amount.value, 'value grater than amount');
+        require(_mobilization + _production + _monitoring <= amount, 'value grater than amount');
     }
 }
