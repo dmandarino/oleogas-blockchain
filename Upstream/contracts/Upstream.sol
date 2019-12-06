@@ -10,6 +10,7 @@ contract Upstream {
         uint code;
         uint geology;
         uint drilling;
+        uint date;
         address last_investment_owner;
     }
 
@@ -17,6 +18,7 @@ contract Upstream {
         uint code;
         uint evaluation;
         uint engineering;
+        uint date;
         address last_investment_owner;
     }
 
@@ -25,6 +27,7 @@ contract Upstream {
         uint mobilization;
         uint production;
         uint monitoring;
+        uint date;
         address last_investment_owner;
     }
     // Read/write Upstream
@@ -47,29 +50,32 @@ contract Upstream {
 	}
 
     function spendInExploration ( uint _geology,
-                                uint _drilling) public {
+                                uint _drilling,
+                                uint _date) public {
         explorationsCount ++;
         validateSpendInExploration(_geology, _drilling);
-        explorations[explorationsCount] = Exploration(explorationsCount, _geology, _drilling, address(0));
+        explorations[explorationsCount] = Exploration(explorationsCount, _geology, _drilling, _date, address(0));
         amount -= (_geology + _drilling);
         emit createdEvent(explorationsCount);
     }
 
     function spendInDevelopment ( uint _evaluation,
-                                uint _engineering) public {
+                                uint _engineering,
+                                uint _date) public {
         developmentsCount ++;
         validateSpendInDevelopment(_evaluation, _engineering);
-        developments[developmentsCount] = Development(developmentsCount, _evaluation, _engineering, address(0));
+        developments[developmentsCount] = Development(developmentsCount, _evaluation, _engineering, _date, address(0));
         amount -= (_evaluation + _engineering);
         emit createdEvent(developmentsCount);
     }
 
     function spendInProduction ( uint _mobilization,
                                 uint _production,
-                                uint _monitoring) public {
+                                uint _monitoring,
+                                uint _date) public {
         productionsCount ++;
         validateSpendInProduction(_mobilization, _production, _monitoring);
-        productions[productionsCount] = Production(productionsCount, _mobilization, _production, _monitoring, address(0));
+        productions[productionsCount] = Production(productionsCount, _mobilization, _production, _monitoring, _date, address(0));
         amount -= (_mobilization + _production + _monitoring);
         amount += (_mobilization + _production + _monitoring);
         emit createdEvent(productionsCount);

@@ -91,10 +91,11 @@ App = {
 
     App.contracts.Upstream.deployed().then(function(instance) {
       const investmentInt = parseInt(value);
+      const timeStamp = Date.now();
       if (selected == 'geology') {
-        return instance.spendInExploration(investmentInt, 0, { from: App.account, gas:3000000 });
+        return instance.spendInExploration(investmentInt, 0, timeStamp, { from: App.account, gas:3000000 });
       } 
-      return instance.spendInExploration(0, investmentInt, { from: App.account, gas:3000000 });
+      return instance.spendInExploration(0, investmentInt, timeStamp, { from: App.account, gas:3000000 });
     }).then(function () {
       console.log('saved');
       window.location.reload();
@@ -110,9 +111,9 @@ App = {
     App.contracts.Upstream.deployed().then(function(instance) {
       const investmentInt = parseInt(value);
       if (selected == 'evaluation') {
-        return instance.spendInDevelopment(investmentInt, 0, { from: App.account, gas:3000000 });
+        return instance.spendInDevelopment(investmentInt, 0, timeStamp, { from: App.account, gas:3000000 });
       } 
-      return instance.spendInDevelopment(0, investmentInt, { from: App.account, gas:3000000 });
+      return instance.spendInDevelopment(0, investmentInt, timeStamp, { from: App.account, gas:3000000 });
     }).then(function () {
       console.log('saved');
       window.location.reload();
@@ -128,11 +129,11 @@ App = {
     App.contracts.Upstream.deployed().then(function(instance) {
       const investmentInt = parseInt(value);
       if (selected == 'mobilization') {
-        return instance.spendInProduction(investmentInt, 0, 0, { from: App.account, gas:3000000 });
+        return instance.spendInProduction(investmentInt, 0, 0, timeStamp, { from: App.account, gas:3000000 });
       } else if (selected == 'monitoring') {
-        return instance.spendInProduction(0, 0, investmentInt, { from: App.account, gas:3000000 });
+        return instance.spendInProduction(0, 0, investmentInt, timeStamp, { from: App.account, gas:3000000 });
       } 
-      return instance.spendInProduction(0, investmentInt, 0, { from: App.account, gas:3000000 });
+      return instance.spendInProduction(0, investmentInt, 0, timeStamp, { from: App.account, gas:3000000 });
     }).then(function () {
       console.log('saved');
       window.location.reload();

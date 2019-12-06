@@ -16,7 +16,7 @@ contract("Upstream", function(accounts) {
     it("Spend in Exploration Geology", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInExploration(10000000000, 0);
+        instance.spendInExploration(10000000000, 0, Date.now());
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 10000000000);
@@ -26,7 +26,7 @@ contract("Upstream", function(accounts) {
     it("Spend in Exploration Drilling", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInExploration(0, 5000000000);
+        instance.spendInExploration(0, 5000000000, Date.now());
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 5000000000);
@@ -36,7 +36,7 @@ contract("Upstream", function(accounts) {
     it("Spend in Exploration Gelology and Drilling", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInExploration(1000000000, 1000000000);
+        instance.spendInExploration(1000000000, 1000000000, Date.now());
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 3000000000);
@@ -46,7 +46,7 @@ contract("Upstream", function(accounts) {
     it("Spend more then Amount in Exploration", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        return instance.spendInExploration(1000000000000, 0);
+        return instance.spendInExploration(1000000000000, 0, Date.now());
       }).then(assert.fail).catch(function(error) {
         assert(error.message.indexOf('value grater than amount') >= 0, 'value grater than amount');
       });
@@ -65,7 +65,7 @@ contract("Upstream", function(accounts) {
     it("Spend in Development Evaluation", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInDevelopment(1000000000, 0);
+        instance.spendInDevelopment(1000000000, 0, Date.now());
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 2000000000);
@@ -75,7 +75,7 @@ contract("Upstream", function(accounts) {
     it("Spend in Development Engineering", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInDevelopment(0, 1000000000);
+        instance.spendInDevelopment(0, 1000000000, Date.now());
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 1000000000);
@@ -85,7 +85,7 @@ contract("Upstream", function(accounts) {
     it("Spend in Development Evaluation and Engineering", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInDevelopment(100000000, 100000000);
+        instance.spendInDevelopment(100000000, 100000000, Date.now());
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 800000000);
@@ -95,7 +95,7 @@ contract("Upstream", function(accounts) {
     it("Spend more then Amount in Development", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        return instance.spendInDevelopment(1000000000000, 0);
+        return instance.spendInDevelopment(1000000000000, 0, Date.now());
       }).then(assert.fail).catch(function(error) {
         assert(error.message.indexOf('value grater than amount') >= 0, 'value grater than amount');
       });
@@ -114,7 +114,7 @@ contract("Upstream", function(accounts) {
     it("Spend in Production", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInProduction(100000000, 50000000, 50000000);
+        instance.spendInProduction(100000000, 50000000, 50000000, Date.now());
         return instance.amount();
       }).then(function (amount) {
         assert.equal(amount, 600000000);
@@ -135,7 +135,7 @@ contract("Upstream", function(accounts) {
     it("Spend more then Amount in Production", function () {
       return Upstream.deployed().then(function (instance) {
         // UpstreamInstance = instance;
-        instance.spendInProduction(1000000000000, 0, 0);
+        instance.spendInProduction(1000000000000, 0, 0, Date.now());
       }).then(assert.fail).catch(function(error) {
         assert(error.message.indexOf('value grater than amount') >= 0, 'value grater than amount');
       });
