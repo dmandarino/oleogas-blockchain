@@ -56,44 +56,45 @@ App = {
       return instance.getProductionSpent();
     }).then(function (total) {
       console.log(total + " production");
-      arrayOfExpenses[0] = parseInt(total[0] + total[1] + total[2]);
+      arrayOfExpenses[0] = parseInt(total[0]) + parseInt(total[1]) + parseInt(total[2]);
+      App.contracts.Upstream.deployed().then(function (instance) {
+        return instance.getExplorationSpent();
+      }).then(function (total) {
+        console.log(total + " exploration");
+        arrayOfExpenses[1] = parseInt(total[0]) + parseInt(total[1]);
+         App.contracts.Upstream.deployed().then(function (instance) {
+          return instance.getDevelopmentSpent();
+        }).then(function (total) {
+          console.log(total + " development");
+          arrayOfExpenses[2] = parseInt(total[0]) + parseInt(total[1]);
+          var ctx = document.getElementById('chartContainer').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Production', 'Exploration', 'Development'],
+                datasets: [{
+                    label: 'spent',
+                    data: arrayOfExpenses,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {}
+          });
+          console.log(arrayOfExpenses);
+          $("#totalExpenses").html("R$ " + parseInt(arrayOfExpenses[0] + arrayOfExpenses[1] + arrayOfExpenses[2]) + ",00");
+        });
+      });
     });
-    App.contracts.Upstream.deployed().then(function (instance) {
-      return instance.getExplorationSpent();
-    }).then(function (total) {
-      console.log(total + " exploration");
-      arrayOfExpenses[1] = parseInt(total[0] + total[1]);
-    });
-    App.contracts.Upstream.deployed().then(function (instance) {
-      return instance.getDevelopmentSpent();
-    }).then(function (total) {
-      console.log(total + " development");
-      arrayOfExpenses[2] = parseInt(total[0] + total[1]);
-    });
-    var ctx = document.getElementById('chartContainer').getContext('2d');
-    var myChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-          labels: ['Production', 'Exploration', 'Development'],
-          datasets: [{
-              label: 'spent',
-              data: arrayOfExpenses,
-              backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {}
-    });
-    $("#totalExpenses").html("R$ " + parseInt(arrayOfExpenses[0] + arrayOfExpenses[1] + arrayOfExpenses[2]) + ",00");
   },
 
   getEarnings: function() {
