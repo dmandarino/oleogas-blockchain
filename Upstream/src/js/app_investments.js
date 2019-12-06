@@ -60,9 +60,8 @@ App = {
     var upstreamInstance;
 
     App.contracts.Upstream.deployed().then(function(instance) {
-      upstreamInstance = instance;
       const investmentInt = parseInt(investment);
-      return upstreamInstance.addAmount(investmentInt, { from: App.account });
+      return instance.addAmount(investmentInt, { from: App.account });
     }).then(function () {
       console.log('saved');
       window.location.reload();
