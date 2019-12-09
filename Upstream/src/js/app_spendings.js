@@ -53,31 +53,37 @@ App = {
     }).then(function (total) {
       totalAmount = total;
       App.contracts.Upstream.deployed().then(function (instance) {
-        return instance.getProductionSpent();
+        return instance.getExplorationSpent();
       }).then(function (total) {
-        var amount = parseInt(total[0]) + parseInt(total[1]) + parseInt(total[2]);
-        var percentage = (parseInt(amount)/parseInt(totalAmount))*100;
-        console.log(percentage);
-        $('#productionPercentage').html(percentage + "%");
-        $('#progressProduction').css('width', percentage+'%').attr('aria-valuenow', percentage);
+        var geologyPercentage = parseInt(total[0])/parseInt(totalAmount)*100;
+        $('#geologyPercentage').html(geologyPercentage + "%");
+        $('#progressGeology').css('width', geologyPercentage+'%').attr('aria-valuenow', geologyPercentage);
+        var drillingPercentage = parseInt(total[1])/parseInt(totalAmount)*100;
+        $('#drillingPercentage').html(drillingPercentage + "%");
+        $('#progressDrilling').css('width', drillingPercentage+'%').attr('aria-valuenow', drillingPercentage);
 
         App.contracts.Upstream.deployed().then(function (instance) {
-          return instance.getExplorationSpent();
+          return instance.getDevelopmentSpent();
         }).then(function (total) {
-          var amount = parseInt(total[0]) + parseInt(total[1]);
-          var percentage = (parseInt(amount)/parseInt(totalAmount))*100;
-          console.log(percentage);
-          $('#explorationPercentage').html(percentage + "%");
-          $('#progressExploration').css('width', percentage+'%').attr('aria-valuenow', percentage);
+          var evaluationyPercentage = parseInt(total[0])/parseInt(totalAmount)*100;
+          $('#evaluationPercentage').html(evaluationyPercentage + "%");
+          $('#progressEvaluation').css('width', evaluationyPercentage+'%').attr('aria-valuenow', evaluationyPercentage);
+          var engineeringPercentage = parseInt(total[1])/parseInt(totalAmount)*100;
+          $('#engineeringPercentage').html(engineeringPercentage + "%");
+          $('#progressEngineering').css('width', engineeringPercentage+'%').attr('aria-valuenow', engineeringPercentage);
 
            App.contracts.Upstream.deployed().then(function (instance) {
-            return instance.getDevelopmentSpent();
+            return instance.getProductionSpent();
           }).then(function (total) {
-            var amount = parseInt(total[0]) + parseInt(total[1]);
-            var percentage = (parseInt(amount)/parseInt(totalAmount))*100;
-            console.log(percentage);
-            $('#developmentPercentage').html(percentage + "%");
-            $('#progressDevelopment').css('width', percentage+'%').attr('aria-valuenow', percentage);
+            var mobilizationPercentage = parseInt(total[0])/parseInt(totalAmount)*100;
+          $('#mobilizationPercentage').html(mobilizationPercentage + "%");
+          $('#progressMobilization').css('width', mobilizationPercentage+'%').attr('aria-valuenow', mobilizationPercentage);
+          var productionPercentage = parseInt(total[1])/parseInt(totalAmount)*100;
+          $('#productionPercentage').html(productionPercentage + "%");
+          $('#progressProduction').css('width', productionPercentage+'%').attr('aria-valuenow', productionPercentage);
+          var monitoringPercentage = parseInt(total[2])/parseInt(totalAmount)*100;
+          $('#monitoringPercentage').html(monitoringPercentage + "%");
+          $('#progressMonitoring').css('width', monitoringPercentage+'%').attr('aria-valuenow', monitoringPercentage);
           });
         });
       });
@@ -87,12 +93,13 @@ App = {
 
   spendInExploration: function() {
     const value = $('#exploration').val();
-    const selected = $('input[name="exploration"]:checked').val();
+    const selected = document.getElementById('explorationSelect');
 
     App.contracts.Upstream.deployed().then(function(instance) {
       const investmentInt = parseInt(value);
       const timeStamp = Date.now();
-      if (selected == 'geology') {
+
+      if (selected.options[selected.selectedIndex].value == 'geology') {
         return instance.spendInExploration(investmentInt, 0, timeStamp, { from: App.account, gas:3000000 });
       } 
       return instance.spendInExploration(0, investmentInt, timeStamp, { from: App.account, gas:3000000 });
@@ -106,11 +113,12 @@ App = {
 
   spendInDevelopment: function() {
     const value = $('#development').val();
-    const selected = $('input[name="development"]:checked').val();
+    const selected = document.getElementById('developmentSelect');
 
     App.contracts.Upstream.deployed().then(function(instance) {
       const investmentInt = parseInt(value);
-      if (selected == 'evaluation') {
+      const timeStamp = Date.now();
+      if (selected.options[selected.selectedIndex].value == 'evaluation') {
         return instance.spendInDevelopment(investmentInt, 0, timeStamp, { from: App.account, gas:3000000 });
       } 
       return instance.spendInDevelopment(0, investmentInt, timeStamp, { from: App.account, gas:3000000 });
@@ -124,13 +132,14 @@ App = {
 
   spendInProduction: function() {
     const value = $('#production').val();
-    const selected = $('input[name="production"]:checked').val();
+    const selected = document.getElementById('productionSelect');
 
     App.contracts.Upstream.deployed().then(function(instance) {
       const investmentInt = parseInt(value);
-      if (selected == 'mobilization') {
+      const timeStamp = Date.now();
+      if (selected.options[selected.selectedIndex].value == 'mobilization') {
         return instance.spendInProduction(investmentInt, 0, 0, timeStamp, { from: App.account, gas:3000000 });
-      } else if (selected == 'monitoring') {
+      } else if (selected.options[selected.selectedIndex].value == 'monitoring') {
         return instance.spendInProduction(0, 0, investmentInt, timeStamp, { from: App.account, gas:3000000 });
       } 
       return instance.spendInProduction(0, investmentInt, 0, timeStamp, { from: App.account, gas:3000000 });
