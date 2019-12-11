@@ -39,9 +39,10 @@
 ## Instalação de dependências
 > npm install
 
-## Rebuild do Contrato e Testes
+## Rebuild do Contrato
 > truffle migrate --reset
 
+## Executar Testes
 > truffle test
 
 ## Execução das páginas
