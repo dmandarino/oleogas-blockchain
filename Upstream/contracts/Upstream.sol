@@ -113,6 +113,38 @@ contract Upstream {
         return (geology, drilling);
     }
 
+    function getExploration(uint _code) public view returns(uint, uint, uint) {
+        uint geology = 0;
+        uint drilling = 0;
+        uint date = 0;
+        date = explorations[_code].date;
+        geology = explorations[_code].geology;
+        drilling = explorations[_code].drilling;
+        return (date, geology, drilling);
+    }
+
+    function getProduction(uint _code) public view returns(uint, uint, uint, uint) {
+        uint mobilization = 0;
+        uint production = 0;
+        uint monitoring = 0;
+        uint date = 0;
+        date = productions[_code].date;
+        mobilization = productions[_code].mobilization;
+        production = productions[_code].production;
+        monitoring = productions[_code].monitoring;
+        return (date, mobilization, production, monitoring);
+    }
+
+    function getDevelopment(uint _code) public view returns(uint, uint, uint) {
+        uint evaluation = 0;
+        uint engineering = 0;
+        uint date = 0;
+        date = developments[_code].date;
+        evaluation = developments[_code].evaluation;
+        engineering = developments[_code].engineering;
+        return (date, evaluation, engineering);
+    }
+
     function validateSpendInExploration(uint _geology, uint _drilling) private {
         require(_geology >= 0 && _drilling >= 0 && _geology + _drilling <= amount, 'value grater than amount');
     }

@@ -103,31 +103,21 @@ App = {
 
   getExploration: async function(count) {
     var exploration = [];
-    let promise = new Promise ((res, rej) => {
-      for(var i = 1; i < count; i++) {
-        upstreamInstance.explorations(i).then(function (data) {
-          console.log('inside async');
-          var timeStamp = data[3];
-          var amount = parseInt(data[1].c[0]) + parseInt(data[2].c[0]);
-          exploration.push({x: new Date(timeStamp.c[0]), y: amount});          
-        });
-        console.log('out async');
-      }
-      console.log('out for');
-      console.log('out promise');
-    });
-    console.log('awaiting');
-    let result = await promise;
-    console.log(result + "aa");
-
+    for (var i = 1; i <= count; i++) {
+      await upstreamInstance.getExploration(i).then(function (data) {
+        var timeStamp = data[0];
+        var amount = parseInt(data[1].c[0]) + parseInt(data[2].c[0]);
+        exploration.push({x: new Date(timeStamp.c[0]), y: amount});          
+      });
+    }
     return exploration;
   },
 
   getDevelopment: async function(count) {
     var development = [];
-    for(var i = 1; i < count; i++) {
-      upstreamInstance.developments(i).then(function (data) {
-        var timeStamp = data[3];
+    for(var i = 1; i <= count; i++) {
+      await upstreamInstance.getDevelopment(i).then(function (data) {
+        var timeStamp = data[0];
         var amount = parseInt(data[1].c[0]) + parseInt(data[2].c[0]);
         development.push({x: new Date(timeStamp.c[0]), y: amount});          
       });
@@ -137,9 +127,9 @@ App = {
 
   getProduction: async function(count) {
     var production = [];
-    for(var i = 1; i < count; i++) {
-      upstreamInstance.productions(i).then(function (data) {
-        var timeStamp = data[4];
+    for(var i = 1; i <= count; i++) {
+      await upstreamInstance.getProduction(i).then(function (data) {
+        var timeStamp = data[0];
         var amount = parseInt(data[1].c[0]) + parseInt(data[2].c[0]) + parseInt(data[3].c[0]);
         production.push({x: new Date(timeStamp.c[0]), y: amount});          
       });
