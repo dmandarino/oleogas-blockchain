@@ -44,10 +44,10 @@ contract Upstream {
         addAmount(0);
     }
 
-	function addAmount (uint _amount) public {
+    function addAmount (uint _amount) public {
         amount += _amount;
         totalAmount += _amount;
-	}
+    }
 
     function spendInExploration ( uint _geology,
                                 uint _drilling,
@@ -77,7 +77,6 @@ contract Upstream {
         validateSpendInProduction(_mobilization, _production, _monitoring);
         productions[productionsCount] = Production(productionsCount, _mobilization, _production, _monitoring, _date, address(0));
         amount -= (_mobilization + _production + _monitoring);
-        amount += (_mobilization + _production + _monitoring);
         emit createdEvent(productionsCount);
     }
 
